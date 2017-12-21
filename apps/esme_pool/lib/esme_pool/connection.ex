@@ -8,8 +8,8 @@ defmodule EsmePool.Connection do
     {:ok, esme} = SMPPEX.ESME.Sync.start_link(host, port)
     Logger.info("Binding Transmitter")
     bind = SMPPEX.Pdu.Factory.bind_transmitter(system_id, password)
-    {:ok, _bind_resp} = SMPPEX.ESME.Sync.request(esme, bind)
-    Logger.info("Transmitter bounded")
+    {:ok, bind_resp} = SMPPEX.ESME.Sync.request(esme, bind)
+    Logger.info("Transmitter bounded #{inspect bind_resp}")
     {:ok, esme}
   end
 
