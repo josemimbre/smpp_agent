@@ -7,9 +7,18 @@ defmodule SmppSender.Application do
 
   def start(_type, _args) do
     # List all child processes to be supervised
+
+    poolboy_config = [
+      name: {:local, :smpp_sender},
+      worker_module: SmppSender.Worker,
+      size: Application.get_env(:smpp_sender, :pool_size),
+      max_overflow: Application.get_env(:smpp_sender, :pool_max)
+    ]
+
+    redis_queue_name = Application.get_env(:smpp_sender, :redis_queue)
+
     children = [
-      # Starts a worker by calling: SmppSender.Worker.start_link(arg)
-      # {SmppSender.Worker, arg},
+      :poolboy.child_spec(:smpp_sender, poolboy_config, [redis_queue_name])
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
