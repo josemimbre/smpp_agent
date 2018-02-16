@@ -6,13 +6,13 @@ defmodule EsmePool.Application do
   use Application
 
   def start(_type, _args) do
-
     poolboy_config = [
       name: {:local, :esme_pool},
       worker_module: EsmePool.Connection,
       size: Application.get_env(:esme_pool, :pool_size),
       max_overflow: Application.get_env(:esme_pool, :pool_max)
     ]
+
     esme_config = [
       Application.get_env(:esme_pool, :hostname),
       Application.get_env(:esme_pool, :port),

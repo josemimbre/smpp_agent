@@ -9,7 +9,7 @@ defmodule EsmePool.Connection do
     Logger.info("Binding Transmitter")
     bind = SMPPEX.Pdu.Factory.bind_transmitter(system_id, password)
     {:ok, bind_resp} = SMPPEX.ESME.Sync.request(esme, bind)
-    Logger.info("Transmitter bounded #{inspect bind_resp}")
+    Logger.info("Transmitter bounded #{inspect(bind_resp)}")
     {:ok, esme}
   end
 

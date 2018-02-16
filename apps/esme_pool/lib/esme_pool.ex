@@ -11,9 +11,8 @@ defmodule EsmePool do
   end
 
   def send_message(%Message{from: from, to: to, text: text}) do
-    :poolboy.transaction(
-      :esme_pool,
-      fn(esme) -> EsmePool.Connection.send_message(esme, from, to, text) end
-    )
+    :poolboy.transaction(:esme_pool, fn esme ->
+      EsmePool.Connection.send_message(esme, from, to, text)
+    end)
   end
 end

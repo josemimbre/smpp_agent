@@ -21,7 +21,7 @@ defmodule SmppSender.Worker do
     from = list["from"]
     to = list["destination"]
     text = list["text"]
-    Logger.info("from: #{inspect from} - to: #{inspect to} - text: #{inspect text}")
+    Logger.info("from: #{inspect(from)} - to: #{inspect(to)} - text: #{inspect(text)}")
     EsmePool.send_message(%EsmePool.Message{from: {from, 1, 1}, to: {to, 1, 1}, text: text})
   end
 

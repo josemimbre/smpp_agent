@@ -6,7 +6,6 @@ defmodule RedisPool.Application do
   use Application
 
   def start(_type, _args) do
-
     poolboy_config = [
       name: {:local, :redis_pool},
       worker_module: :eredis,
