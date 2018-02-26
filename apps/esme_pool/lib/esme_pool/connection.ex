@@ -6,10 +6,10 @@ defmodule EsmePool.Connection do
   def start_link([host, port, system_id, password]) do
     Logger.info("Connecting to #{host}:#{port}")
     {:ok, esme} = SMPPEX.ESME.Sync.start_link(host, port)
-    Logger.info("Binding Transmitter")
+    Logger.info("Binding Transmitter with system_id #{system_id}")
     bind = SMPPEX.Pdu.Factory.bind_transmitter(system_id, password)
     {:ok, bind_resp} = SMPPEX.ESME.Sync.request(esme, bind)
-    Logger.info("Transmitter bounded #{inspect(bind_resp)}")
+    Logger.info("Transmitter bounded")
     {:ok, esme}
   end
 

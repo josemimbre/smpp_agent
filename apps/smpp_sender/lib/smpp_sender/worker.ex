@@ -26,7 +26,8 @@ defmodule SmppSender.Worker do
   end
 
   def run(redis_queue_name) do
-    {:ok, result} = get_message(redis_queue_name)
-    send_message(result)
+    case get_message(redis_queue_name) do
+      {:ok, result} -> send_message(result)
+    end
   end
 end
